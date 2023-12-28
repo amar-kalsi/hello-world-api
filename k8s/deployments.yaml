@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: default-1703791751133
+spec:
+  finalizers:
+    - kubernetes
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-api-v1
+  namespace: default-1703791751133
+  labels:
+    app: hello-world-api
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world-api
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: hello-world-api
+        version: v1
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+      containers:
+        - name: hello-world-api
+          image: helloworldtask2024.azurecr.io/hello-world-api:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 2
+              memory: 2G
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-api-v2
+  namespace: default-1703791751133
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world-api
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: hello-world-api
+        version: v2
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+      containers:
+        - name: hello-world-api
+          image: helloworldtask2024.azurecr.io/hello-world-api:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 2
+              memory: 2G
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-api
+  namespace: default-1703791751133
+  labels:
+    app: hello-world-api
+    service: hello-world-api
+spec:
+  ports:
+    - targetPort: 80
+      name: port80
+      port: 80
+      protocol: TCP
+    - port: 9080
+      name: http
+  selector:
+    app: hello-world-api
