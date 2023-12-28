@@ -151,5 +151,4 @@ The following is a quick summary of the steps to achieve this:
         ```
         echo "http://$GATEWAY_URL_EXTERNAL/productpage"
         ```
-- <img width="440" alt="image" src="https://github.com/amar-kalsi/hello-world-api/assets/78261247/f8213d4d-101a-4969-b8cd-51a5ad9b22dd">
-:)
+- :)
