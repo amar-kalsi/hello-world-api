@@ -149,6 +149,6 @@ The following is a quick summary of the steps to achieve this:
         ```
     - Retrieve the external address of the sample application:
         ```
-        echo "http://$GATEWAY_URL_EXTERNAL/productpage"
+        echo "http://$GATEWAY_URL_EXTERNAL/hello"
         ```
 - :)
