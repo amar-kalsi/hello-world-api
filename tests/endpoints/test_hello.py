@@ -21,5 +21,4 @@ def test_hello(
         assert json.loads(response.text) == resp.content()
     else:
         assert response.status_code == resp.get("status_code")
-        assert json.loads(response.content) == resp.content()
-
+        assert json.loads(response.content) == resp.get("content")
